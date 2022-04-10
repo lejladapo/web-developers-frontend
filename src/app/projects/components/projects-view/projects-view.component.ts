@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProjectModel} from "../../../model/project-model";
+import {ProjectInfoEnum} from "../../../model/project-info.enum";
+import {Route} from "../../../routing/route";
 
 @Component({
   selector: 'app-projects-view',
   templateUrl: './projects-view.component.html',
   styleUrls: ['./projects-view.component.css']
 })
-export class ProjectsViewComponent implements OnInit {
+export class ProjectsViewComponent {
 
-  constructor() { }
+  @Input()
+  public project!: ProjectModel;
 
-  ngOnInit(): void {
-  }
+  public projectInfo = ProjectInfoEnum;
+  public route = Route;
 
 }
