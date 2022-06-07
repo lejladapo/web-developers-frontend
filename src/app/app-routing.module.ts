@@ -11,7 +11,9 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {ProjectsResolver} from "./resolver/projects-resolver";
 import {AuthorizedGuard} from "./guards/authorized.guard";
 import {HomeContainerComponent} from "./common/home/containers/home-container.component";
-import {ProjectResponse} from "./routing/project-response";
+import {AppResponse} from "./routing/app-response";
+import {PersonResolver} from "./resolver/person.resolver";
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 const routes: Routes = [
 
@@ -22,13 +24,17 @@ const routes: Routes = [
         component: LogInComponent },
       { path: Route.SIGNUP,
         component: SignUpComponent },
-      { path: Route.CONTACT,
-        component: ContactComponent },
+      { path: Route.PROFILE,
+        component: UserProfileComponent,
+      resolve:{
+        [AppResponse.PERSON]: PersonResolver,
+      }},
       { path: Route.HOME,
         canActivate: [AuthorizedGuard],
         component: HomeContainerComponent,
         resolve: {
-          [ProjectResponse.PROJECTS]: ProjectsResolver,
+          [AppResponse.PERSON]: PersonResolver,
+          [AppResponse.PROJECTS]: ProjectsResolver,
         },
       },
       { path: Route.CONTACT,
